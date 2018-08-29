@@ -1,0 +1,257 @@
+ MySQL  localhost:3306 ssl  SQL > \evaluacion_1
+                              ... \use evaluacion_1
+                              ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '\evaluacion_1
+\use evaluacion_1' at line 1
+
+ MySQL  localhost:3306 ssl  SQL > \use evaluacion_1 ;
+\use <schema_name>
+
+ MySQL  localhost:3306 ssl  SQL > show tables;
+ERROR: 1046 (3D000): No database selected
+
+ MySQL  localhost:3306 ssl  SQL > \use evaluacion_1;
+MySQL Error 1049 (42000): ClassicSession.runSql: Unknown database 'evaluacion_1;'
+
+ MySQL  localhost:3306 ssl  SQL > \use evaluacion_1
+Default schema set to `evaluacion_1`.
+Fetching table and column names from `evaluacion_1` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show yables;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'yables' at line 1
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
+Empty set (0.0016 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > \use evaluacion_1
+Default schema set to `evaluacion_1`.
+Fetching table and column names from `evaluacion_1` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
+Empty set (0.0018 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| evaluacion_1       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.0011 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > \use evaluacion_1
+Default schema set to `evaluacion_1`.
+Fetching table and column names from `evaluacion_1` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
+Empty set (0.0015 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > \use evaluacion_1
+Default schema set to `evaluacion_1`.
+Fetching table and column names from `evaluacion_1` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > \use world
+Default schema set to `world`.
+Fetching table and column names from `world` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  world  SQL > show tables;
++-----------------+
+| Tables_in_world |
++-----------------+
+| city            |
+| country         |
+| countrylanguage |
+| prueba          |
++-----------------+
+4 rows in set (0.0016 sec)
+
+ MySQL  localhost:3306 ssl  world  SQL > \use evaluacion_1
+Default schema set to `evaluacion_1`.
+Fetching table and column names from `evaluacion_1` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > create table materias(
+                                            ... nombre varchar(100),
+                                            ... creditos int,
+                                            ... horas_teoricas int,
+                                            ... horas_practicas int,
+                                            ... carrera varchar(3),
+                                            ... semestre int);
+Query OK, 0 rows affected (0.8657 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
++------------------------+
+| Tables_in_evaluacion_1 |
++------------------------+
+| materias               |
++------------------------+
+1 row in set (0.0016 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc materias;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| nombre          | varchar(100) | YES  |     | NULL    |       |
+| creditos        | int(11)      | YES  |     | NULL    |       |
+| horas_teoricas  | int(11)      | YES  |     | NULL    |       |
+| horas_practicas | int(11)      | YES  |     | NULL    |       |
+| carrera         | varchar(3)   | YES  |     | NULL    |       |
+| semestre        | int(11)      | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+6 rows in set (0.0018 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > create table estudiante(
+                                            ... no_control varchar(10),
+                                            ... nombre varchar(50),
+                                            ... apellido_paterno varchar(50),
+                                            ... apellido_materno varchar(50),
+                                            ... fecha_nacimiento date,
+                                            ... direccion varchar(100),
+                                            ... lugar_nacimiento varchar(50),
+                                            ... pais_nacimiento varchar(50),
+                                            ... genero varchar(50));
+Query OK, 0 rows affected (0.5591 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
++------------------------+
+| Tables_in_evaluacion_1 |
++------------------------+
+| estudiante             |
+| materias               |
++------------------------+
+2 rows in set (0.0017 sec)
+ MySQL  localhost:3306 ssl  SQL > \use evaluacion_1
+Default schema set to `evaluacion_1`.
+Fetching table and column names from `evaluacion_1` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
++------------------------+
+| Tables_in_evaluacion_1 |
++------------------------+
+| estudiante             |
+| materias               |
++------------------------+
+2 rows in set (0.0015 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > select * from temporal;
+ERROR: 1146 (42S02): Table 'evaluacion_1.temporal' doesn't exist
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > create table Condenada(
+                                            ... no_por_favor int);
+Query OK, 0 rows affected (0.5145 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
++------------------------+
+| Tables_in_evaluacion_1 |
++------------------------+
+| condenada              |
+| estudiante             |
+| materias               |
++------------------------+
+3 rows in set (0.0019 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > drop table condenada;
+Query OK, 0 rows affected (0.4990 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
++------------------------+
+| Tables_in_evaluacion_1 |
++------------------------+
+| estudiante             |
+| materias               |
++------------------------+
+2 rows in set (0.0015 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table estudiante add column no_telefono varchar(50);
+Query OK, 0 rows affected (0.3794 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL >
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc tables;
+ERROR: 1146 (42S02): Table 'evaluacion_1.tables' doesn't exist
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
++------------------------+
+| Tables_in_evaluacion_1 |
++------------------------+
+| estudiante             |
+| materias               |
++------------------------+
+2 rows in set (0.0018 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc estudiante;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| no_control       | varchar(10)  | YES  |     | NULL    |       |
+| nombre           | varchar(50)  | YES  |     | NULL    |       |
+| apellido_paterno | varchar(50)  | YES  |     | NULL    |       |
+| apellido_materno | varchar(50)  | YES  |     | NULL    |       |
+| fecha_nacimiento | date         | YES  |     | NULL    |       |
+| direccion        | varchar(100) | YES  |     | NULL    |       |
+| lugar_nacimiento | varchar(50)  | YES  |     | NULL    |       |
+| pais_nacimiento  | varchar(50)  | YES  |     | NULL    |       |
+| genero           | varchar(50)  | YES  |     | NULL    |       |
+| no_telefono      | varchar(50)  | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+10 rows in set (0.0018 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table estudiante add column correo(50);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(50)' at line 1
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table estudiante add column correo varchar(50);
+Query OK, 0 rows affected (0.5547 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc estudiante;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| no_control       | varchar(10)  | YES  |     | NULL    |       |
+| nombre           | varchar(50)  | YES  |     | NULL    |       |
+| apellido_paterno | varchar(50)  | YES  |     | NULL    |       |
+| apellido_materno | varchar(50)  | YES  |     | NULL    |       |
+| fecha_nacimiento | date         | YES  |     | NULL    |       |
+| direccion        | varchar(100) | YES  |     | NULL    |       |
+| lugar_nacimiento | varchar(50)  | YES  |     | NULL    |       |
+| pais_nacimiento  | varchar(50)  | YES  |     | NULL    |       |
+| genero           | varchar(50)  | YES  |     | NULL    |       |
+| no_telefono      | varchar(50)  | YES  |     | NULL    |       |
+| correo           | varchar(50)  | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+11 rows in set (0.0021 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > ALTER table drop colum correo;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'drop colum correo' at line 1
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > ALTER table drop column correo;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'drop column correo' at line 1
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > ALTER table estudiante drop column correo;
+Query OK, 0 rows affected (0.9904 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc estudiante;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| no_control       | varchar(10)  | YES  |     | NULL    |       |
+| nombre           | varchar(50)  | YES  |     | NULL    |       |
+| apellido_paterno | varchar(50)  | YES  |     | NULL    |       |
+| apellido_materno | varchar(50)  | YES  |     | NULL    |       |
+| fecha_nacimiento | date         | YES  |     | NULL    |       |
+| direccion        | varchar(100) | YES  |     | NULL    |       |
+| lugar_nacimiento | varchar(50)  | YES  |     | NULL    |       |
+| pais_nacimiento  | varchar(50)  | YES  |     | NULL    |       |
+| genero           | varchar(50)  | YES  |     | NULL    |       |
+| no_telefono      | varchar(50)  | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+10 rows in set (0.0021 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL >\quit
+
+
+
