@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 MySQL Shell 8.0.12
 
 Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
@@ -301,3 +302,308 @@ Records: 0  Duplicates: 0  Warnings: 0
 +-----------------+--------------+------+-----+---------+-------+
 9 rows in set (0.0018 sec)
 
+=======
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  SQL > \connect -c root@localhost
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): Y
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 39
+Server version: 8.0.12 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306 ssl  SQL > \use evaluacion_1
+Default schema set to `evaluacion_1`.
+Fetching table and column names from `evaluacion_1` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > show tables;
++------------------------+
+| Tables_in_evaluacion_1 |
++------------------------+
+| estudiante             |
+| materias               |
++------------------------+
+2 rows in set (0.0013 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc estudiante;
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| no_control       | varchar(10)  | YES  |     | NULL    |       |
+| nombre           | varchar(50)  | YES  |     | NULL    |       |
+| apellido_paterno | varchar(50)  | YES  |     | NULL    |       |
+| apellido_materno | varchar(50)  | YES  |     | NULL    |       |
+| fecha_nacimiento | date         | YES  |     | NULL    |       |
+| direccion        | varchar(100) | YES  |     | NULL    |       |
+| lugar_nacimiento | varchar(50)  | YES  |     | NULL    |       |
+| pais_nacimiento  | varchar(50)  | YES  |     | NULL    |       |
+| genero           | varchar(50)  | YES  |     | NULL    |       |
+| no_telefono      | varchar(50)  | YES  |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+10 rows in set (0.0026 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > create table carrera(
+                                            ... nombre int,
+                                            ... creditos varchar(50),
+                                            ... zemestres int,
+                                            ... email varchar(50));
+Query OK, 0 rows affected (1.0262 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc carrera;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| nombre    | int(11)     | YES  |     | NULL   alter table carrera modify nombre varchar(50);
+Query OK, 0 rows affected (1.3596 sec) | NULL   alter table carrera modify nombre varchar(50);
+| zemestres | int(11)     | YES  |     | NULL   alter table carrera modify nombre varchar(50)
+Records: 0  Duplicates: 0  Warnings: 0 | NULL   alter table carrera modify nombre varchar(50
++-----------+-------------+------+-----+--------alter table carrera modify nombre varchar(5
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc carrera;arrera modify nombre varchar(
++-----------+-------------+------+-----+---------+-------+e carrera modify nombre varcharL  localhost:3306 ssl  evaluacion_1  SQL > alter table carrera modify nombre va
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| nombre    | varchar(50) | YES  |     | NULL    |       |
+| creditos  | varchar(50) | YES  |     | NULL    |       |
+| zemestres | int(11)     | YES  |     | NULL    |       |
+| email     | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.0019 sec)
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table carrera change creditos creditos int;
+Query OK, 0 rows affected (4.3017 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc carrera;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| nombre    | varchar(50) | YES  |     | NULL    |       |
+| creditos  | int(11)     | YES  |     | NULL    |       |
+| zemestres | int(11)     | YES  |     | NULL    |       |
+| email     | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.0759 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table carrera rename zemestres to semestres;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to semestres' at line 1
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table carrera rename column zemestres to semestres;
+Query OK, 0 rows affected (0.2300 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc carrera;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| nombre    | varchar(50) | YES  |     | NULL    |       |
+| creditos  | int(11)     | YES  |     | NULL    |       |
+| semestres | int(11)     | YES  |     | NULL    |       |
+| email     | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.0018 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table carrera drop email;
+Query OK, 0 rows affected (0.9827 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc carrera;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| nombre    | varchar(50) | YES  |     | NULL    |       |
+| creditos  | int(11)     | YES  |     | NULL    |       |
+| semestres | int(11)     | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.0019 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table carrera add column area varchar(50);
+Query OK, 0 rows affected (0.4342 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc carrera;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| nombre    | varchar(50) | YES  |     | NULL    |       |
+| creditos  | int(11)     | YES  |     | NULL    |       |
+| semestres | int(11)     | YES  |     | NULL    |       |
+| area      | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.0019 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > insert into carrera values('Sistemas',500,9,'Sistemas y computacion');
+Query OK, 1 row affected (0.3248 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > insert into carrera values('Sistemas',500,9,'Sistemas y computacion');
+Query OK, 1 row affected (0.1800 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > insert into carrera values('Sistemas',500,9,'Sistemas y computacion');
+Query OK, 1 row affected (0.0997 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > insert into carrera values('Sistemas',500,9,'Sistemas y computacion');
+Query OK, 1 row affected (0.1472 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > select * from carrera;
++----------+----------+-----------+------------------------+
+| nombre   | creditos | semestres | area                   |
++----------+----------+-----------+------------------------+
+| Sistemas |      500 |         9 | Sistemas y computacion |
+| Sistemas |      500 |         9 | Sistemas y computacion |
+| Sistemas |      500 |         9 | Sistemas y computacion |
+| Sistemas |      500 |         9 | Sistemas y computacion |
++----------+----------+-----------+------------------------+
+4 rows in set (0.0005 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > create table nueva_carrera as select * from carrera;
+Query OK, 4 rows affected (0.6094 sec)
+
+Records: 4  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc nueva_carrera;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| nombre    | varchar(50) | YES  |     | NULL    |       |
+| creditos  | int(11)     | YES  |     | NULL    |       |
+| semestres | int(11)     | YES  |     | NULL    |       |
+| area      | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.0023 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > select * from nueva_carrera;
++----------+----------+-----------+------------------------+
+| nombre   | creditos | semestres | area                   |
++----------+----------+-----------+------------------------+
+| Sistemas |      500 |         9 | Sistemas y computacion |
+| Sistemas |      500 |         9 | Sistemas y computacion |
+| Sistemas |      500 |         9 | Sistemas y computacion |
+| Sistemas |      500 |         9 | Sistemas y computacion |
++----------+----------+-----------+------------------------+
+4 rows in set (0.0006 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > create table nueva_carrerota like carrera;
+Query OK, 0 rows affected (0.5219 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc nueva_carrerota;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| nombre    | varchar(50) | YES  |     | NULL    |       |
+| creditos  | int(11)     | YES  |     | NULL    |       |
+| semestres | int(11)     | YES  |     | NULL    |       |
+| area      | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.0023 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > select from * nueva_carrerota;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from * nueva_carrerota' at line 1
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > select * from nueva_carrerota;
+Empty set (0.0013 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > create table horario(
+                                            ... materia varchar(100),
+                                            ... salon varchar(50),
+                                            ... profesor varchar(100),
+                                            ... hora time,
+                                            ... dia date,
+                                            ... no_control varchar(10),
+                                            ... carrera varchar(50));
+Query OK, 0 rows affected (0.6499 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc horario;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| materia    | varchar(100) | YES  |     | NULL    |       |
+| salon      | varchar(50)  | YES  |     | NULL    |       |
+| profesor   | varchar(100) | YES  |     | NULL    |       |
+| hora       | time         | YES  |     | NULL    |       |
+| dia        | date         | YES  |     | NULL    |       |
+| no_control | varchar(10)  | YES  |     | NULL    |       |
+| carrera    | varchar(50)  | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+7 rows in set (0.0025 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table horario add column creditos int;
+Query OK, 0 rows affected (0.4879 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc horario;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| materia    | varchar(100) | YES  |     | NULL    |       |
+| salon      | varchar(50)  | YES  |     | NULL    |       |
+| profesor   | varchar(100) | YES  |     | NULL    |       |
+| hora       | time         | YES  |     | NULL    |       |
+| dia        | date         | YES  |     | NULL    |       |
+| no_control | varchar(10)  | YES  |     | NULL    |       |
+| carrera    | varchar(50)  | YES  |     | NULL    |       |
+| creditos   | int(11)      | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+8 rows in set (0.0019 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table horario add column semestre_actual;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table horario add column semestre_actual int;
+Query OK, 0 rows affected (0.5994 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > desc horario;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| materia         | varchar(100) | YES  |     | NULL    |       |
+| salon           | varchar(50)  | YES  |     | NULL    |       |
+| profesor        | varchar(100) | YES  |     | NULL    |       |
+| hora            | time         | YES  |     | NULL    |       |
+| dia             | date         | YES  |     | NULL    |       |
+| no_control      | varchar(10)  | YES  |     | NULL    |       |
+| carrera         | varchar(50)  | YES  |     | NULL    |       |
+| creditos        | int(11)      | YES  |     | NULL    |       |
+| semestre_actual | int(11)      | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+9 rows in set (0.0018 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL > alter table horario change no_control no_control varchar(20);
+
+
+ MySQL  localhost:3306 ssl  evaluacion_1  SQL >desc horario;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| materia         | varchar(100) | YES  |     | NULL    |       |
+| salon           | varchar(50)  | YES  |     | NULL    |       |
+| profesor        | varchar(100) | YES  |     | NULL    |       |
+| hora            | time         | YES  |     | NULL    |       |
+| dia             | date         | YES  |     | NULL    |       |
+| no_control      | varchar(20)  | YES  |     | NULL    |       |
+| carrera         | varchar(50)  | YES  |     | NULL    |       |
+| creditos        | int(11)      | YES  |     | NULL    |       |
+| semestre_actual | int(11)      | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+9 rows in set (0.0018 sec)
+
+>>>>>>> fd4fb7bcede42eb209b4aaa6a48d071c72e93f9e
