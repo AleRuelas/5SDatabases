@@ -1,0 +1,124 @@
+CUSTOMER 	customerid		companyname
+ORDERS		customerid, orderid	
+ORDER_DETAILS	orderid			quantity
+order by c.quantity
+
+
+1. ¿Cuál es el cliente que más compra (dinero)?
+select a.companyname, sum(c.unitprice * c.quantity) as Total from customers a  
+inner join orders b on a.customerid=b.customerid 
+inner join order_details c on b.orderid=c.orderid 
+group by a.customerid order by total desc limit 1;
+
+QUICK-Stop	117483.3900
+
+------------------------
+2. ¿Cuál es el cliente que menos compra (dinero)?
+select a.companyname, sum(c.unitprice * c.quantity) as Total from customers a  
+inner join orders b on a.customerid=b.customerid 
+inner join order_details c on b.orderid=c.orderid 
+group by a.customerid order by total limit 1;
+
+Centro comercial Moctezuma	100.8000
+
+--------------------
+3. ¿Cuál es el producto más vendido (cantidad)?
+Producto mas vendido (cantidad)
+products	productid	*productname
+orders 		orderid
+order_details	orderid		*quantity
+
+select a.productname, sum(b.quantity) as Cantidad from products a 
+
+inner join order_details b on a.productid=b.productid 
+
+group by a.productname order by Cantidad desc limit 1;
+
+Camembert Pierrot	1577
+
+---------------------
+4. ¿Cuál es el producto más lucrativo (efectivo)?
+select productname, min(UnitPrice) as Menos_lucrativo from products 
+group by productname order by Menos_lucrativo desc limit 1;
+
+Côte de Blaye	263.5000
+
+------------
+5. ¿Cuál es el producto menos lucrativo (efectivo)?
+select productname, min(UnitPrice) as Menos_lucrativo from products 
+group by productname order by Menos_lucrativo asc limit 1;
+
+testSP	0.0000
+Este producto estaba agregado como pruba en la version de la base de datos que pude ejecutar en la version de workbench.
+
+-------------
+6. ¿Cuál es el producto más comprado por el cliente que más compras realiza?
+CUSTOMER 	customerid		*companyname
+ORDERS		customerid, orderid	
+ORDER_DETAILS	orderid			quantity
+PRODUCTS	productid		*productname	
+
+select a.companyname, count(b.orderid) as Compras, c.productname, sum(d.quantity) as Cantidad from customers a
+
+inner join orders b on a.customerid=b.customerid
+inner join order_details d on b.orderid=d.orderid
+
+inner join products c on c.productid=d.productid
+
+group by a.companyname order by Compras desc limit 1;
+
+Save-a-lot Markets	116	Pavlova	4958
+
+------------------------------
+7. ¿Cuál es el empleado con más ventas?
+employees	employeeid 	*lastname, firstname
+orders		orderid
+
+select a.lastname, a.firstname, count(b.orderid) as ventas_totales from employees a
+
+inner join orders b on a.employeeid=b.employeeid 
+
+group by a.employeeid order by ventas_totales desc limit 1;
+
+Peacock	Margaret	156
+
+-----------------
+8. ¿Cuál es el empleado con menos ventas?
+
+select a.lastname, a.firstname, count(b.orderid) as ventas_totales from employees a
+
+inner join orders b on a.employeeid=b.employeeid 
+
+group by a.employeeid order by b.orderid limit 1;
+
+Buchanan	Steven	42
+
+------------------------
+9. ¿A qué proveedores hay que realizarles compras próximamente? 
+(Que no hay unidades en almacén ni en orden de compra ? campos Unitsinstock, unitsonorder)
+suppliers	supplierid	*companyname
+products	*productname 	where unitinstock=0 and unitonorder =0
+
+select a.companyname, b.productname from suppliers a
+ 
+inner join products b on a.supplierid=b.supplierid 
+
+where unitsinstock=0 and unitsonorder=0;
+
+New Orleans Cajun Delights	Chef Anton's Gumbo Mix
+Pavlova, Ltd.	Alice Mutton
+Plutzer Lebensmittelgroßmärkte AG	Thüringer Rostbratwurst
+G'day, Mate	Perth Pasties
+
+---------------------
+10. ¿Cuál es el proveedor al que le compramos más (Unitsonorder, unitprice)?
+suppiers	supplierid	*companyname
+products	TotalCompra (b.unitonirder*b.unitprice)	order by 
+
+select a.companyname, (b.unitsonorder * b.unitprice) as TotalCompra from suppliers a 
+
+inner join products b on a.supplierid=b.supplierid 
+
+order by TotalCompra desc limit 1;
+
+Plutzer Lebensmittelgroßmärkte AG	2660.0000

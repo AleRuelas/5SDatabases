@@ -1,0 +1,234 @@
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  SQL > \connect -c root@localhost
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): y
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 4
+Server version: 5.5.61 MySQL Community Server (GPL)
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306  SQL > \use northwind
+Default schema set to `northwind`.
+Fetching table and column names from `northwind` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306  northwind  SQL > select a.companyname, sum(c.unitprice * c.quantity) as Total from customers a  inner join orders b on a.customerid=b.customerid inner join order_details c on b.orderid=c.orderid group by a.customerid  order by total;
++------------------------------------+-------------+
+| companyname                        | Total       |
++------------------------------------+-------------+
+| Centro comercial Moctezuma         |    100.8000 |
+| Lazy K Kountry Store               |    357.0000 |
+| Laughing Bacchus Wine Cellars      |    522.5000 |
+| North/South                        |    649.0000 |
+| Galer?a del gastr?nomo             |    836.7000 |
+| Ana Trujillo Emparedados y helados |   1402.9500 |
+| Romero y tomillo                   |   1467.2900 |
+| Vins et alcools Chevalier          |   1480.0000 |
+| GROSELLA-Restaurante               |   1488.7000 |
+| Franchi S.p.A.                     |   1545.7000 |
+| Trail's Head Gourmet Provisioners  |   1571.2000 |
+| Du monde entier                    |   1615.9000 |
+| Consolidated Holdings              |   1719.1000 |
+| Cactus Comidas para llevar         |   1814.8000 |
+| The Cracker Box                    |   1947.2400 |
+| La corne d'abondance               |   1992.0500 |
+| Sp?cialit?s du monde               |   2423.3500 |
+| Rancho grande                      |   2844.1000 |
+| Hungry Coyote Import Store         |   3063.2000 |
+| Wilman Kala                        |   3161.3500 |
+| France restauration                |   3172.1600 |
+| Blauer See Delikatessen            |   3239.8000 |
+| The Big Cheese                     |   3361.0000 |
+| Oc?ano Atl?ntico Ltda.             |   3460.2000 |
+| Let's Stop N Shop                  |   3490.0200 |
+| Wolski  Zajazd                     |   3531.9500 |
+| Drachenblut Delikatessen           |   3763.2100 |
+| Com?rcio Mineiro                   |   3810.7500 |
+| Pericles Comidas cl?sicas          |   4242.2000 |
+| Lonesome Pine Restaurant           |   4258.6000 |
+| Familia Arquibaldo                 |   4438.9000 |
+| Alfreds Futterkiste                |   4596.2000 |
+| Toms Spezialit?ten                 |   4954.0000 |
+| Morgenstern Gesundkost             |   5042.2000 |
+| B?lido Comidas preparadas          |   5297.8000 |
+| Princesa Isabel Vinhos             |   5317.1000 |
+| Sant? Gourmet                      |   5735.1500 |
+| B's Beverages                      |   6089.9000 |
+| Island Trading                     |   6146.3000 |
+| Wellington Importadora             |   6480.7000 |
+| Que Del?cia                        |   6973.6300 |
+| Furia Bacalhau e Frutos do Mar     |   7151.5500 |
+| Tradi??o Hipermercados             |   7310.6200 |
+| Antonio Moreno Taquer?a            |   7515.3500 |
+| Reggiani Caseifici                 |   7555.6000 |
+| Magazzini Alimentari Riuniti       |   7603.8500 |
+| Gourmet Lanchonetes                |   8702.2300 |
+| Victuailles en stock               |   9937.1000 |
+| La maison d'Asie                   |  10272.3500 |
+| Maison Dewey                       |  10430.5800 |
+| Die Wandernde Kuh                  |  10653.8500 |
+| Tortuga Restaurante                |  10812.1500 |
+| Folies gourmandes                  |  11666.9000 |
+| Godos Cocina T?pica                |  11830.1000 |
+| Split Rail Beer & Ale              |  12489.7000 |
+| Chop-suey Chinese                  |  12886.3000 |
+| Ricardo Adocicados                 |  12924.4000 |
+| Ottilies K?seladen                 |  13157.5000 |
+| Around the Horn                    |  13806.5000 |
+| Eastern Connection                 |  15033.6600 |
+| Old World Delicatessen             |  16325.1500 |
+| Wartian Herkku                     |  16617.1000 |
+| Vaffeljernet                       |  16643.8000 |
+| Seven Seas Imports                 |  17172.0500 |
+| LILA-Supermercado                  |  17825.0600 |
+| LINO-Delicateses                   |  17889.5500 |
+| Simons bistro                      |  18138.4500 |
+| Blondesddsl p?re et fils           |  19088.0000 |
+| Great Lakes Food Market            |  19711.1300 |
+| Richter Supermarkt                 |  20033.2000 |
+| Lehmanns Marktstand                |  21282.0200 |
+| Bottom-Dollar Markets              |  22607.7000 |
+| HILARION-Abastos                   |  23611.5800 |
+| Bon app'                           |  23850.9500 |
+| Supr?mes d?lices                   |  24704.4000 |
+| Piccolo und mehr                   |  26259.9500 |
+| Berglunds snabbk?p                 |  26968.1500 |
+| Frankenversand                     |  28722.7100 |
+| White Clover Markets               |  29073.4500 |
+| Queen Cozinha                      |  30226.1000 |
+| K?niglich Essen                    |  31745.7500 |
+| M?re Paillarde                     |  32203.9000 |
+| Folk och f? HB                     |  32555.5500 |
+| Hanari Carnes                      |  34101.1500 |
+| Rattlesnake Canyon Grocery         |  52245.9000 |
+| Hungry Owl All-Night Grocers       |  57317.3900 |
+| Ernst Handel                       | 113236.6800 |
+| Save-a-lot Markets                 | 115673.3900 |
+| QUICK-Stop                         | 117483.3900 |
++------------------------------------+-------------+
+89 rows in set (0.0036 sec)
+
+ MySQL  localhost:3306  northwind  SQL > select a.companyname, sum(c.unitprice * c.quantity) as Total from customers a  inner join orders b on a.customerid=b.customerid inner join order_details c on b.orderid=c.orderid group by a.customerid order by total desc limit 1;
++-------------+-------------+
+| companyname | Total       |
++-------------+-------------+
+| QUICK-Stop  | 117483.3900 |
++-------------+-------------+
+1 row in set (0.0037 sec)
+
+ MySQL  localhost:3306  northwind  SQL > select a.companyname, sum(c.unitprice * c.quantity) as Total from customers a  inner join orders b on a.customerid=b.customerid inner join order_details c on b.orderid=c.orderid group by a.customerid order by total limit 1;
++----------------------------+----------+
+| companyname                | Total    |
++----------------------------+----------+
+| Centro comercial Moctezuma | 100.8000 |
++----------------------------+----------+
+1 row in set (0.0036 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select a.productname, sum(b.quantity) as Cantidad from products a
+                                         ...
+                                         ... inner join order_details b on a.productid=b.productid
+                                         ...
+                                         ... group by a.productname order by Cantidad desc limit 1;
++-------------------+----------+
+| productname       | Cantidad |
++-------------------+----------+
+| Camembert Pierrot |     1577 |
++-------------------+----------+
+1 row in set (0.0041 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select productname, min(UnitPrice) as Menos_lucrativo from products
+                                         ... group by productname order by Menos_lucrativo desc limit 1;
++----------------+-----------------+
+| productname    | Menos_lucrativo |
++----------------+-----------------+
+| Cote de Blaye  | 263.5000	   |
++----------------+-----------------+
+1 row in set (0.0031 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select productname, min(UnitPrice) as Menos_lucrativo from products
+                                         ... group by productname order by Menos_lucrativo asc limit 1;
++----------------+-----------------+
+| productname    | Menos_lucrativo |
++----------------+-----------------+
+| testSP         | 0.0000	   |
++----------------+-----------------+
+1 row in set (0.0012 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select a.companyname, count(b.orderid) as Compras, c.productname, sum(d.quantity) as Cantidad from customers a
+
+					 ... inner join orders b on a.customerid=b.customerid
+                                         ... inner join order_details d on b.orderid=d.orderid
+                                         ... inner join products c on c.productid=d.productid
+                                         ... group by a.companyname order by Compras desc limit 1;
++--------------------+---------+-------------+----------+
+| companyname        | Compras | productname | Cantidad |
++--------------------+---------+-------------+----------+
+| Save-a-lot Markets |     116 | Pavlova     |     4958 |
++--------------------+---------+-------------+----------+
+1 row in set (0.0299 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select a.lastname, a.firstname, count(b.orderid) as ventas_totales from employees a
+
+                                         ... inner join orders b on a.employeeid=b.employeeid 
+
+                                         ... group by a.employeeid order by ventas_totales desc limit 1;
++----------+-----------+-----------------+
+| lastname | firstname | Ventas_totales  |
++----------+-----------+-----------------+
+| Peacock  | Margaret  | 156 		 |
++----------+-----------+-----------------+
+1 row in set (0.0013 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select a.lastname, a.firstname, count(b.orderid) as ventas_totales from employees a
+
+                                         ... inner join orders b on a.employeeid=b.employeeid 
+
+                                         ... group by a.employeeid order by b.orderid limit 1;
++----------+-----------+----------------+
+| lastname | firstname | ventas_totales |
++----------+-----------+----------------+
+| Buchanan | Steven    | 42             |
++----------+-----------+----------------+
+1 row in set (0.0012 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select a.companyname, b.productname from suppliers a
+                                         ...
+                                         ... inner join products b on a.supplierid=b.supplierid
+                                         ...
+                                         ... where unitsinstock=0 and unitsonorder=0;
++-------------------------------------+--------------------------+
+| companyname                         | productname              |
++-------------------------------------+--------------------------+
+| New Orleans Cajun Delights          | Chef Anton's Gumbo Mix   |
+| Pavlova, Ltd.                       | Alice Mutton             |
+| Plutzer Lebensmittelgro MySQL  localhost:3306 ssl  northwind  SQL >
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select a.companyname, (b.unitsonorder * b.unitprice) as TotalCompra from suppliers a 
+
+					 ... inner join products b on a.supplierid=b.supplierid
+                                         ...
+                                         ... order by TotalCompra desc limit 1;
++-------------------------------------+-------------+
+| companyname                         | TotalCompra |
++-------------------------------------+-------------+
+| Plutzer Lebensmittelgroﬂm‰rkte AG   | 2660.0000   |
++-------------------------------------+-------------+
+
+
+
+
+
