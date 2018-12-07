@@ -1,0 +1,146 @@
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  SQL > \connect -c root@localhost
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): y
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 38
+Server version: 8.0.12 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306 ssl  SQL > \use evaluacion_3
+Default schema set to `evaluacion_3`.
+Fetching table and column names from `evaluacion_3` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  evaluacion_3  SQL > select sumatoria(5);
++--------------+
+| sumatoria(5) |
++--------------+
+|           15 |
++--------------+
+1 row in set (0.0007 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_3  SQL > select sumatoria(10);
++---------------+
+| sumatoria(10) |
++---------------+
+|            55 |
++---------------+
+1 row in set (0.0004 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_3  SQL > select sumatoria(100);
++----------------+
+| sumatoria(100) |
++----------------+
+|           5050 |
++----------------+
+1 row in set (0.0007 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_3  SQL > select sumatoria(37);
++---------------+
+| sumatoria(37) |
++---------------+
+|           703 |
++---------------+
+1 row in set (0.0005 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_3  SQL > create table temp(
+                                            ... nombre varchar (5))<
+                                            ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '<' at line 2
+
+ MySQL  localhost:3306 ssl  evaluacion_3  SQL > create table temp( nombre varchar (5));
+Query OK, 0 rows affected (1.5055 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_3  SQL > insert into temp values('A'),('B'),('C');
+Query OK, 3 rows affected (0.2772 sec)
+
+Records: 3  Duplicates: 0  Warnings: 0
+
+ MySQL  localhost:3306 ssl  evaluacion_3  SQL > select * from temp;
++--------+
+| nombre |
++--------+
+| A      |
+| B      |
+| C      |
++--------+
+3 rows in set (0.0004 sec)
+
+ MySQL  localhost:3306 ssl  evaluacion_3  SQL > \USE NORTHWIND
+                                            ... <
+                                            ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '\USE NORTHWIND
+<' at line 1
+
+ MySQL  localhost:3306 ssl  evaluacion_3  SQL > \use northwind
+Default schema set to `northwind`.
+Fetching table and column names from `northwind` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select sumatoria(5);
++--------------+
+| sumatoria(5) |
++--------------+
+|           15 |
++--------------+
+1 row in set (0.0011 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > desc customers;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| CustomerID   | char(5)     | NO   | PRI | NULL    |       |
+| CompanyName  | varchar(40) | NO   | MUL | NULL    |       |
+| ContactName  | varchar(30) | YES  |     | NULL    |       |
+| ContactTitle | varchar(30) | YES  |     | NULL    |       |
+| Address      | varchar(60) | YES  |     | NULL    |       |
+| City         | varchar(15) | YES  | MUL | NULL    |       |
+| Region       | varchar(15) | YES  | MUL | NULL    |       |
+| PostalCode   | varchar(10) | YES  | MUL | NULL    |       |
+| Country      | varchar(15) | YES  |     | NULL    |       |
+| Phone        | varchar(24) | YES  |     | NULL    |       |
+| Fax          | varchar(24) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+11 rows in set (0.0109 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select customerid, companyname, sumatoria(5) as ejemplo
+                                         ... from customers;
++------------+--------------------------------------+---------+
+| customerid | companyname                          | ejemplo |
++------------+--------------------------------------+---------+
+| ALFKI      | Alfreds Futterkiste                  |      15 |
+| ANATR      | Ana Trujillo Emparedados y helados   |      15 |
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select cuenta_ordenes('ANATR');
++-------------------------+
+| cuenta_ordenes('ANATR') |
++-------------------------+
+|                       4 |
++-------------------------+
+1 row in set (0.0011 sec)
+
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select customerid, companyname, cuenta_ordenes(customerid)
+                                         ... from customers limit 10;
++------------+------------------------------------+----------------------------+
+| customerid | companyname                        | cuenta_ordenes(customerid) |
++------------+------------------------------------+----------------------------+
+| ALFKI      | Alfreds Futterkiste                |                          6 |
+| ANATR      | Ana Trujillo Emparedados y helados |                          4 |
+| ANTON      | Antonio Moreno Taquer MySQL  localhost:3306 ssl  northwind  SQL >
+
+

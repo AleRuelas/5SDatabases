@@ -1,0 +1,300 @@
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  SQL > \connect -c local@host
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'local@host'
+Please provide the password for 'local@host': ****
+MySQL Error 2005 (HY000): Unknown MySQL server host 'host' (2)
+
+ MySQL  SQL > \connect -c root@localhost
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): y
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.12 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306 ssl  SQL > \use northwind
+Default schema set to `northwind`.
+Fetching table and column names from `northwind` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306 ssl  northwind  SQL > desc customers;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| CustomerID   | char(5)     | NO   | PRI | NULL    |       |
+| CompanyName  | varchar(40) | NO   | MUL | NULL    |       |
+| ContactName  | varchar(30) | YES  |     | NULL    |       |
+| ContactTitle | varchar(30) | YES  |     | NULL    |       |
+| Address      | varchar(60) | YES  |     | NULL    |       |
+| City         | varchar(15) | YES  | MUL | NULL    |       |
+| Region       | varchar(15) | YES  | MUL | NULL    |       |
+| PostalCode   | varchar(10) | YES  | MUL | NULL    |       |
+| Country      | varchar(15) | YES  |     | NULL    |       |
+| Phone        | varchar(24) | YES  |     | NULL    |       |
+| Fax          | varchar(24) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+11 rows in set (0.0018 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > call consulta_clientes;
++------------+--------------------------------------+-------------------------+
+| customerid | companyname                          | contactname             |
++------------+--------------------------------------+-------------------------+
+| ALFKI      | Alfreds Futterkiste                  | Maria Anders            |
+| ANATR      | Ana Trujillo Emparedados y helados   | Ana Trujillo            |
+| ANTON      | Antonio Moreno Taquer MySQL  localhost:3306 ssl  northwind  SQL >
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consulta_clientes`()
+
+BEGIN
+	
+	SELECT customerid, companyname, contactname from customers;
+
+END
+
+
+ MySQL  localhost:3306 ssl  northwind  SQL > call conteo_clientes(@conteo);
+Query OK, 1 row affected (0.0200 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select @conteo;
++---------+
+| @conteo |
++---------+
+|      91 |
++---------+
+1 row in set (0.0003 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL >
+
+CREATE PROCEDURE `conteo_clientes` (out cont int)
+
+BEGIN
+	
+	select count(*) into cont
+ from customers;
+
+END
+
+ MySQL  localhost:3306 ssl  northwind  SQL > call conteo_clientes_filtro('A',@conteo);
+Query OK, 1 row affected (0.1554 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select @conteo
+                                         ... ;
++---------+
+| @conteo |
++---------+
+|       4 |
++---------+
+1 row in set (0.0003 sec)
+
+CREATE PROCEDURE `conteo_clientes_filtro` (in letra text, out conteo int)
+
+BEGIN
+	
+	select count(*) into conteo from customers
+	
+	where companyname like concat(letra,'%'); #Es un comodin %
+
+END
+
+ MySQL  localhost:3306 ssl  northwind  SQL > desc region;
++-------------------+----------+------+-----+---------+-------+
+| Field             | Type     | Null | Key | Default | Extra |
++-------------------+----------+------+-----+---------+-------+
+| RegionID          | int(11)  | NO   | PRI | NULL    |       |
+| RegionDescription | char(50) | NO   |     | NULL    |       |
++-------------------+----------+------+-----+---------+-------+
+2 rows in set (0.0018 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select * from region;
++----------+-------------------+
+| RegionID | RegionDescription |
++----------+-------------------+
+|        1 | Eastern           |
+|        2 | Western           |
+|        3 | Northern          |
+|        4 | Southern          |
++----------+-------------------+
+4 rows in set (0.1439 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select max(regionid) from region;
++---------------+
+| max(regionid) |
++---------------+
+|             4 |
++---------------+
+1 row in set (0.0004 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > call agregar_region('En un lugar muy muy lejano');
+Query OK, 1 row affected (0.2662 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select * from region;
++----------+----------------------------+
+| RegionID | RegionDescription          |
++----------+----------------------------+
+|        1 | Eastern                    |
+|        2 | Western                    |
+|        3 | Northern                   |
+|        4 | Southern                   |
+|        5 | En un lugar muy muy lejano |
++----------+----------------------------+
+5 rows in set (0.0004 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > call agregar_region('Madagascar','Laluencia');
+ERROR: 1318 (42000): Incorrect number of arguments for PROCEDURE northwind.agregar_region; expected 1, got 2
+
+ MySQL  localhost:3306 ssl  northwind  SQL > call agregar_region('Madagascar');
+Query OK, 1 row affected (0.2525 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > call agregar_region('Fondo de bikini');
+Query OK, 1 row affected (0.2445 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select * from region;
++----------+----------------------------+
+| RegionID | RegionDescription          |
++----------+----------------------------+
+|        1 | Eastern                    |
+|        2 | Western                    |
+|        3 | Northern                   |
+|        4 | Southern                   |
+|        5 | En un lugar muy muy lejano |
+|        6 | Madagascar                 |
+|        7 | Fondo de bikini            |
++----------+----------------------------+
+7 rows in set (0.0006 sec)
+
+CREATE PROCEDURE `agregar_region` (in nombre_region text)
+
+BEGIN
+	
+	declare clave int;
+    
+	select max(regionid) into clave from region;
+    
+	set clave = clave +1;
+    
+	insert into region values(clave, nombre_region);	
+
+END
+
+
+ MySQL  localhost:3306 ssl  northwind  SQL > call rfc_auto;
+Query OK, 0 rows affected (0.0057 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > desc copy_employees;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| EmployeeID      | int(11)      | NO   |     | 0       |       |
+| rfc             | varchar(12)  | YES  |     | NULL    |       |
+| LastName        | varchar(20)  | NO   |     | NULL    |       |
+| FirstName       | varchar(10)  | NO   |     | NULL    |       |
+| Title           | varchar(30)  | YES  |     | NULL    |       |
+| TitleOfCourtesy | varchar(25)  | YES  |     | NULL    |       |
+| BirthDate       | datetime     | YES  |     | NULL    |       |
+| HireDate        | datetime     | YES  |     | NULL    |       |
+| Address         | varchar(60)  | YES  |     | NULL    |       |
+| City            | varchar(15)  | YES  |     | NULL    |       |
+| Region          | varchar(15)  | YES  |     | NULL    |       |
+| PostalCode      | varchar(10)  | YES  |     | NULL    |       |
+| Country         | varchar(15)  | YES  |     | NULL    |       |
+| HomePhone       | varchar(24)  | YES  |     | NULL    |       |
+| Extension       | varchar(4)   | YES  |     | NULL    |       |
+| Photo           | longblob     | YES  |     | NULL    |       |
+| Notes           | longtext     | YES  |     | NULL    |       |
+| ReportsTo       | int(11)      | YES  |     | NULL    |       |
+| PhotoPath       | varchar(255) | YES  |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+19 rows in set (0.0023 sec)
+
+ MySQL  localhost:3306 ssl  northwind  SQL > select employeeid, rfc, lastname,firstname, birthdate from
+                                         ... copy_employees;
++------------+--------------+-----------+-----------+---------------------+
+| employeeid | rfc          | lastname  | firstname | birthdate           |
++------------+--------------+-----------+-----------+---------------------+
+|          1 | DAXN19481208 | Davolio   | Nancy     | 1948-12-08 00:00:00 |
+|          2 | FUXA19520219 | Fuller    | Andrew    | 1952-02-19 00:00:00 |
+|          3 | LEXJ19630830 | Leverling | Janet     | 1963-08-30 00:00:00 |
+|          4 | PEXM19370919 | Peacock   | Margaret  | 1937-09-19 00:00:00 |
+|          5 | BUXS19550304 | Buchanan  | Steven    | 1955-03-04 00:00:00 |
+|          6 | SUXM19630702 | Suyama    | Michael   | 1963-07-02 00:00:00 |
+|          7 | KIXR19600529 | King      | Robert    | 1960-05-29 00:00:00 |
+|          8 | CAXL19580109 | Callahan  | Laura     | 1958-01-09 00:00:00 |
+|          9 | DOXA19660127 | Dodsworth | Anne      | 1966-01-27 00:00:00 |
++------------+--------------+-----------+-----------+---------------------+
+9 rows in set (0.0005 sec)
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `rfc_auto`()
+BEGIN
+
+	declare conteo int;
+    declare empleado_id text;
+    declare p_nombre varchar(10);
+    declare apellido varchar(20);
+    declare fecha date;
+    declare valor text;
+    declare rfc1 text;
+    #variable booleana de control
+     declare fin_cursor int default false ;
+     #variable cursor (select)
+     declare cursor_clientes cursor for 
+		select employeeid, firstname, lastname, birthdate from copy_employees;
+    #manejador (handle) para la variable booleana
+    declare continue handler for not found 
+		set fin_cursor= true;
+        
+        
+    set conteo=0;
+    
+    
+   #usar cursor
+   open cursor_clientes;
+   #usamos un ciclo para recorrerlo
+	ciclo_conteo: loop
+		#equivalente a iterate
+		fetch cursor_clientes into empleado_id, p_nombre, apellido, fecha;
+        
+        
+        # al llegar al final se produce la excepcion
+        if fin_cursor then
+			leave ciclo_conteo;
+		else 
+			set rfc1 = generar_rfc(p_nombre, apellido, '', fecha);
+            
+            update copy_employees 
+            set rfc= rfc1 where employeeid=empleado_id;
+		end if;
+    end loop;
+    #cerrar cursor
+    close cursor_clientes;
+
+END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
